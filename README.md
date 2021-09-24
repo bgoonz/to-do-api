@@ -50,7 +50,7 @@ Post:
 - title
 - isDone
 - date
-- _creator
+- \_creator
 
 ## Routes
 

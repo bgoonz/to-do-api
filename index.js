@@ -1,35 +1,35 @@
-const express = require('express');
-const Cors = require('cors');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const user = require('./routes/user');
-const post = require('./routes/post');
-const { DB, allowed_url } = require('./config/config.js');
+const express = require("express");
+const Cors = require("cors");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const user = require("./routes/user");
+const post = require("./routes/post");
+const { DB, allowed_url } = require("./config/config.js");
 
 const app = express();
 
 app.use(
-	Cors({
-		origin: allowed_url
-	})
+  Cors({
+    origin: allowed_url,
+  })
 );
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const connectDb = async () => {
-	try {
-		await mongoose.connect(DB, { useNewUrlParser: true });
-		console.log('mongoDB connected');
-	} catch (err) {
-		console.log(err);
-	}
+  try {
+    await mongoose.connect(DB, { useNewUrlParser: true });
+    console.log("mongoDB connected");
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 connectDb();
 
-app.use('/api/user', user);
-app.use('/api/post', post);
+app.use("/api/user", user);
+app.use("/api/post", post);
 
 const port = process.env.PORT || 5000;
 
